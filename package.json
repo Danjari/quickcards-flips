@@ -12,15 +12,19 @@
     "@splinetool/react-spline": "^4.0.0",
     "@tsparticles/react": "^3.0.0",
     "class-variance-authority": "^0.7.0",
+    "firebase": "^10.13.0",
     "framer-motion": "^11.3.28",
     "lucide-react": "^0.427.0",
     "next": "14.2.5",
+    "openai": "^4.56.0",
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "shadcn": "^1.0.0",
     "tailwind-merge": "^2.5.2",
-    "tsparticles": "^3.5.0"
+    "tsparticles": "^3.5.0",
+    "unstructured-client": "^0.15.1"
   },
   "devDependencies": {
     "@types/node": "^20",
