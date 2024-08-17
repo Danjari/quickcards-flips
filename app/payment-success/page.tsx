@@ -13,10 +13,10 @@ export default function PaymentSuccess({
             ${amount}
           </div>
           {/* a button to login */}
-          <div>
-            <button className="text-black bg-white p-5 w-1/2 mt-10 rounded-xl font-bold disabled:opacity-50 disabled:animate-pulse hover:bg-slate-200">
-              Login
-            </button>
+          <div className="mt-10">
+            <a href="/dashboard" className="text-black bg-white p-5 w-1/2 mt-10 rounded-xl font-bold disabled:opacity-50 disabled:animate-pulse hover:bg-slate-200">
+             Start Learning
+            </a>
           </div>
         </div>
       </main>

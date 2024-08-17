@@ -3,7 +3,7 @@ const nextConfig = {};
 
 export default nextConfig;
 
-// Use this file to enable HTTPS on your local machine
+//Use this file to enable HTTPS on your local machine
 
 // next.config.mjs
 
