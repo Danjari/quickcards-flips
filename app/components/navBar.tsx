@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -18,9 +18,15 @@ const NavBar = () => {
                 <a href="#pricing" className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Pricing</a>
               </div>
             </div>
-            <div>
+            <div className="flex items-center space-x-4 hover:text-gray-300">
               {/*Login Button */}
-              <button className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Login</button>
+              {/* <button className="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Login</button> */}
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </div>
           </div>
           <div className="flex md:hidden">

@@ -40,7 +40,7 @@ interface IPricingCardProps {
           <a href={link} className='bg-fuchsia-700 rounded p-2 text-sm transition-colors text-center text-bold hover:bg-fuchsia-800'>Get Started!</a>
         </div>
        
-        <div className='flex flex-col w-full gap-4'>
+        <div className='flex flex-col w-full gap-3 mt-4'>
           {features.map((feature, i) => {
             return(
               <p key={i} className='text-sm text-zinc-500 flex items-center gap-2'>

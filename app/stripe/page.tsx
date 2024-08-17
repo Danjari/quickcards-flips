@@ -11,8 +11,8 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function StripeLayout(){
-    // amount the user wants to pay either Free or 9.99 ( list price )
-    const amount = 19.99
+    // amount the user wants to pay either Free or 29.99 ( list price )
+    const amount = 29.99
     return <main className = 'max-w-xl mx-auto p-10 text-white text-center  m-10 border rounded-2xl  [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]'>
         <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
         <div className='mb-10 mt-10 mx-auto '>

@@ -11,10 +11,10 @@ const PricingCards: IPricingCards[] =  [
     {
         title: "Basic",
         price: 0,
-        features: ["10 Cards per week","Gpt-3", "5 Pdfs Downloads"],
+        features: ["10 Cards per week","Gpt-3.5", "5 Pdf Downloads"],
         id: 1,
         oneliner:"Great for beginners",
-        link:"/login"
+        link:"/dashboard"
     },
     {
         title: "Premium",

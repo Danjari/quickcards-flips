@@ -12,9 +12,9 @@ const Header = () => {
                 <p className='max-w-md text-sm md:text-base text-zinc-500 text-center'>QuickCards is an AI-powered Flash Card Generator that helps you remember anything wuhgpiawugpawiugpweigbapeigbpeaigjbpWIGJB vpiGUAPEIGJBpigb. piwbfp.</p>
                 
                 <div className='w-full flex items-center justify-center'>
-                <button className="px-6 py-3 text-sm sm:text-base rounded-full bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors">
+                <a href='#pricing' className="px-6 py-3 text-sm sm:text-base rounded-full bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors">
                    Try it for free!
-                </button>
+                </a>
                     </div>
             
             </div>
