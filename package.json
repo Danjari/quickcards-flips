@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.0.0",
+    "@stripe/react-stripe-js": "^2.8.0",
+    "@stripe/stripe-js": "^4.3.0",
     "@tsparticles/react": "^3.0.0",
+    "anchor-pki": "^0.3.2",
     "class-variance-authority": "^0.7.0",
     "firebase": "^10.13.0",
     "framer-motion": "^11.3.28",
@@ -22,6 +25,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "shadcn": "^1.0.0",
+    "stripe": "^16.8.0",
     "tailwind-merge": "^2.5.2",
     "tsparticles": "^3.5.0",
     "unstructured-client": "^0.15.1"

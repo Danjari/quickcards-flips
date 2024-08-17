@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'danjari'
+
+[service]
+apid = 'quickcards'
+category = 'javascript'
+cert-style = 'acme'

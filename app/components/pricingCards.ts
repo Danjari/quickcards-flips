@@ -3,30 +3,26 @@ interface IPricingCards {
     price: number;
     features: string[];
     id: number;
-    oneliner:string
+    oneliner:string;
+    link:string
 }
 
 const PricingCards: IPricingCards[] =  [
     {
         title: "Basic",
-        price: 100,
-        features: ["100 tests", "100 positive tests", "100 negative tests"],
+        price: 0,
+        features: ["10 Cards per week","Gpt-3", "5 Pdfs Downloads"],
         id: 1,
-        oneliner:"aieguhqpaiguapeig",
+        oneliner:"Great for beginners",
+        link:"/login"
     },
     {
-        title: "Pro",
-        price: 200,
-        features: ["200 tests", "200 positive tests", "200 negative tests"],
+        title: "Premium",
+        price: 29.99,
+        features: ["Unlimited Flashcards", "Gpt-4o", "Unlimited Pdf Downloads", "24/7 Support","Invite to community Events"],
         id: 2,
-        oneliner:"egawjengpqiguhqa"
-    },
-    {
-        title: "Enterprise",
-        price: 300,
-        features: ["300 tests", "300 positive tests", "300 negative tests"],
-        id: 3,
-        oneliner:"epiuqhagpiaeurgqpaiurgnqpaieg"
+        oneliner:"Best for students",
+        link:"/stripe"
     },
 ]
 
