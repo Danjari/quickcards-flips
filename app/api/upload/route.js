@@ -85,7 +85,7 @@ export async function POST(req) {
     await setDoc(deckRef, flashcardData);
 
     return NextResponse.json({
-      message: `The flashcards were created successfully`,
+      flashcardsArray
     });
   } catch (error) {
     console.error("Error during document processing: ", error);
