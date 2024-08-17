@@ -1,59 +1,97 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import { writeFile } from "fs/promises";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage, db } from "../../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { createFlashcards } from "../create_flashcards/route";
 import { UnstructuredClient } from "unstructured-client";
-import { PartitionResponse } from "unstructured-client/sdk/models/operations";
-import { Strategy } from "unstructured-client/sdk/models/shared";
+import { Buffer } from "buffer";
 
 export async function POST(req) {
-
-  //this is to get the file from the frontend
-  const formData = await req.formData();
-  const file = formData.get("file");
-  if (!file) {
-    return NextResponse.json({ success: false });
-  }
-  //we need to convert it to a buffer since that is what the api can work with
-  const buffer = Buffer.from(await file.arrayBuffer());
-
   try {
-    // const path = `./files/${file.name}`
-    //   await writeFile(path,buffer);
-    //   return NextResponse.json({ Message: "Success", status: 201 });
+    // Get the file from the request
+    const formData = await req.formData();
+    const file = formData.get("file");
+    if (!file) {
+      return NextResponse.json({ success: false });
+    }
 
-    //init the unstructured client
+    // Convert file to buffer
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const fileRef = ref(storage, `files/${file.name}`);
+
+    // Initialize UnstructuredClient
     const key = process.env.UNSTRUCTURED_API_KEY;
     const url = process.env.UNSTRUCTURED_API_URL;
-    let client = null;
-    client = new UnstructuredClient({
+    const client = new UnstructuredClient({
       security: {
         apiKeyAuth: key,
       },
       serverURL: url,
     });
-    //this is basically what does the ocr for us
-    await client?.general
-      .partition({
-        partitionParameters: {
-          files: {
-            content: buffer, // Corrected line
-            fileName: file.name,
-          },
-          splitPdfPage: true,
-          splitPdfAllowFailed: true,
-          splitPdfConcurrencyLevel: 15,
-          languages: ["eng"],
+
+    // Call UnstructuredClient API
+    const response = await client.general.partition({
+      partitionParameters: {
+        files: {
+          content: buffer,
+          fileName: file.name,
         },
-      })
-      .then((response) => {
-        if (response.statusCode === 200) {
-          const jsonElements = JSON.stringify(response.elements, null, 2);
-          console.log(jsonElements);
-          return NextResponse.json({ message: `${jsonElements}` });
-        }
-      });
+        splitPdfPage: true,
+        splitPdfAllowFailed: true,
+        splitPdfConcurrencyLevel: 15,
+        languages: ["eng"],
+      },
+    });
+
+    if (response.statusCode !== 200) {
+      throw new Error(`Failed to process the document: ${response.statusCode}`);
+    }
+    //gettings the text from the pdf
+    const jsonElements = JSON.stringify(response.elements, null, 2); 
+    //now we are going to store the reference of the pdf in firestore
+    const docRef = doc(db, "pdfs", file.name);
+    const data = {
+      name: file.name,
+      flashcard_deck_name: `Deck for ${file.name}`,
+      corpus: jsonElements,
+    };
+
+    // Get the file URL from Firebase Storage
+    const fileURL = await getDownloadURL(fileRef);
+    data.url = fileURL;
+
+    // Save document to Firestore
+    await setDoc(docRef, data);
+
+    // Create flashcards
+    let flashcards = await createFlashcards(jsonElements);
+    console.log(typeof flashcards);
+    flashcards = JSON.parse(flashcards);
+    console.log(typeof flashcards);
+    //checking that we actually get an array
+    const flashcardsArray = flashcards.flashcards;
+    if (!flashcardsArray || !Array.isArray(flashcardsArray)) {
+      throw new Error('OpenAI did not return valid flashcards.');
+    }
+
+    // Prepare flashcard data for Firestore
+    const deckRef = doc(db, "flashcards", data.flashcard_deck_name);
+    const flashcardData = {
+      cards: flashcardsArray,
+      origin: file.name,
+    };
+
+    // Save flashcards to Firestore
+    await setDoc(deckRef, flashcardData);
+
+    return NextResponse.json({
+      message: `The flashcards were created successfully`,
+    });
   } catch (error) {
-    console.log("Error occured ", error);
-    return NextResponse.json({ Message: "Failed", status: 500 });
+    console.error("Error during document processing: ", error);
+    return NextResponse.json({
+      success: false,
+      message: `Error during document processing: ${error.message}`,
+    });
   }
 }

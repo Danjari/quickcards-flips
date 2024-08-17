@@ -24,36 +24,38 @@ const DropZone = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //this is the logic to add a pdf and
     if (!file) return;
-    // const fileRef = ref(storage, `files/${file.name}`)
-    // const uploadTask = uploadBytesResumable(fileRef, file);
-    // uploadTask.on(
-    //   "state_changed",
-    //   (snapshot) => {
-    //     const progress =
-    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     setUploadProgress(Math.round(progress));
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   },
-    //   () => { //update the download url for future downloads
-    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-    //       setDownloadURL(downloadURL);
-    //     });
-    //   },
-    // );
-    try {
-      const data = new FormData();
-      data.set("file", file);
-      const response = await fetch("api/upload", {
-        method: "POST",
-        body: data,
-      });
-      if (!response.ok) throw new Error(await response.text());
-    } catch (error) {
-      console.error(error);
-    }
+    const fileRef = ref(storage, `files/${file.name}`);
+    const uploadTask = uploadBytesResumable(fileRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(Math.round(progress));
+      },
+      (error) => {
+        console.log(error);
+      },
+      async () => {
+        //update the download url for future downloads
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setDownloadURL(downloadURL);
+        });
+        try {
+          const data = new FormData();
+          data.set("file", file);
+          const response = await fetch("api/upload", {
+            method: "POST",
+            body: data,
+          });
+          if (!response.ok) throw new Error(await response.text());
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    );
   };
   return (
     <div className="p-2 bg-white rounded-xl">
