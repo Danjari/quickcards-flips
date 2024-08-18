@@ -7,6 +7,8 @@ import { FlashcardArray } from "react-quizlet-flashcard";
 import { storage } from "../../firebase";
 import Deck from "./Deck";
 const DropZone = () => {
+
+  //The different states for handling file, cards, and the upload progress
   const [uploadProgress, setUploadProgress] = useState(0);
   const [flashcards, setFlashcards] = useState([]);
   const [downloadURL, setDownloadURL] = useState("");
@@ -14,15 +16,18 @@ const DropZone = () => {
     Array<{ id: number; frontHTML: string; backHTML: string }>
   >([]);
   const [file, setFile] = useState<File>();
+  const [isuploaded, setIsUploaded] = useState(false);
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "application/pdf": [".pdf"] },
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles[0]) {
         setFile(acceptedFiles[0]);
+        setIsUploaded(true);
       }
     },
   });
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,7 +86,7 @@ const DropZone = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-y-4">
       <div className="p-2 bg-white rounded-xl">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center">
           <div
             {...getRootProps({
               className:
@@ -92,12 +97,13 @@ const DropZone = () => {
             <>
               <Inbox className="w-10 h-10 text-blue-500 text-center" />
             </>
-            <p className="mt-2 text-sm text-slate-400">
-              Drag 'n' drop some files here, or click to select files
-            </p>
+            {isuploaded ? (<p className="mt-2 text-sm text-slate-400">{file?.name} has been uploaded, click 'Generate' to create your flashcards</p>) : (<p className="mt-2 text-sm text-slate-400">
+                                 Drag 'n' drop some files here, or click to select files
+                               </p>)}
+            
           </div>
-          <button className="text-black" type="submit">
-            Save File
+          <button className=" mt-2 px-6 py-3 text-sm sm:text-base rounded-full bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors" type="submit">
+            Generate
           </button>
         </form>
 

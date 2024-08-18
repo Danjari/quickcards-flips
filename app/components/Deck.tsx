@@ -25,7 +25,7 @@ export default function Deck({ cards }: DeckProps) {
         showCount={true}
         frontContentStyle={{
           backgroundColor: "white",
-          color: "yellow",
+          color: "black",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -34,9 +34,13 @@ export default function Deck({ cards }: DeckProps) {
         backContentStyle={{
           backgroundColor: "white",
           color: "black",
+          display: 'flex',
           justifyContent: "center",
           alignItems: "center",
           padding: "10px",
+        }}
+        frontCardStyle={{
+          padding: '10px',
         }}
       />
     </div>
