@@ -27,9 +27,8 @@ const Header = () => {
                 <a href='#pricing' className="px-6 py-3 text-sm sm:text-base rounded-full bg-white text-black hover:bg-fuchsia-700 hover:text-white transition-colors">
                    Try it for free!
                 </a>
-                    </div>
+                    */}
 
-            
                 </div>
         </header>
     );
