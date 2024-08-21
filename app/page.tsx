@@ -1,25 +1,38 @@
+
 'use client'
-import NavBar from './components/navBar';
-import PricingSection from './components/pricingSection';
-import About from './components/about';
-import Header from './components/Header';
+import { useState, useEffect } from 'react'
+import NavBar from './components/navBar'
+import Hero from './components/Hero'
+import About from './components/Feature'
+import PricingSection from './components/pricingSection'
+import { useUser } from '@clerk/nextjs'
+import {useRouter} from "next/navigation"
 
 
+export default function Example() {
+  const router = useRouter()
+  const{isSignedIn} = useUser()
+
+  useEffect(() => {
+    if (typeof window!== "undefined" && isSignedIn) {
+      router.push('/dashboard')
+    }
+  }, [isSignedIn, router])
 
 
-export default function Home() {
   return (
-    <main className="flex min-h-screen h-fit flex-col items-center justify-center relative">
-      
-      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-      
-      <NavBar />
-      <Header />
-      <About />
-      <PricingSection />
+    <main>
+      <div className="bg-white">
+        <NavBar />
+        <Hero />
+        <About />
+        <PricingSection />
+     
+   
+      </div>
 
     </main>
-  );
+  )
 }
 
 

@@ -9,30 +9,28 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 }
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
-
 export default function StripeLayout(){
     // amount the user wants to pay either Free or 29.99 ( list price )
     const amount = 29.99
-    return <main className = 'max-w-xl mx-auto p-10 text-white text-center  m-10 border rounded-2xl  [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]'>
-        <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-        <div className='mb-10 mt-10 mx-auto '>
-            <h1 className='text-4xl font-bold mb-4'>Proceed to Payment</h1>
-            <h2 className='text-2xl mb-4'>
+    return (    
+    <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-screen flex items-center justify-center overflow-true">
+        <div className='mb-4 mt-4 mx-auto bg-white shadow-xl p-4 rounded-2xl max-w-md w-full'>
+            <h1 className='text-2xl font-extrabold mb-4 text-center text-indigo-700'>Proceed to Payment</h1>
+            <h2 className='text-xl mb-4 text-center text-gray-700'>
                 Lifetime cost of  
-                <span className='font-bold'> ${amount}</span>
+                <span className='font-bold text-indigo-600'> ${amount}</span>
             </h2>
+            <Elements
+                stripe={stripePromise}
+                options ={{
+                    mode: 'payment',
+                    amount:convertToSubcurrency(amount),
+                    currency: 'usd',
+                }}
+            >
+                <CheckoutPage amount={amount}/>
+            </Elements>
         </div>
-        <Elements
-         stripe={stripePromise}
-         options ={{
-            mode: 'payment',
-            amount:convertToSubcurrency(amount),
-            currency: 'usd',
-
-        }}
-         
-         >
-            <CheckoutPage amount={amount}/>
-        </Elements>
-    </main>
+    </div>
+    )
 }

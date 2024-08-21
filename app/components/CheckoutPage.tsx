@@ -42,7 +42,7 @@ const CheckoutPage = ({amount}: {amount: number}) => {
             elements,
             clientSecret,
             confirmParams: {
-                return_url: `/payment-success?amount=${amount}`,
+                return_url: `http://localhost:3000/payment-success?amount=${amount}`,
             },
         })
        if (result.error) {
@@ -58,7 +58,7 @@ const CheckoutPage = ({amount}: {amount: number}) => {
         return (
           <div className="flex items-center justify-center">
             <div
-              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-indigo-600 motion-reduce:animate-[spin_1.5s_linear_infinite]"
               role="status"
             >
               <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
@@ -73,7 +73,7 @@ const CheckoutPage = ({amount}: {amount: number}) => {
         <form className=' bg-white p-2 rounded-md' onSubmit={handleSubmit}>
             {clientSecret && <PaymentElement/>}
             {errorMessage && <div>{errorMessage}</div>}
-            <button disabled={!stripe || !elements || loading} className='text-white bg-black p-5 w-full mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse'>
+            <button disabled={!stripe || !elements || loading} className='text-white bg-indigo-600 p-5 w-full mt-2 rounded-md font-bold disabled:opacity-50 disabled:animate-pulse'>
                 {loading ? "Processing..." : `Pay $ ${amount}`}
             </button>
         </form>

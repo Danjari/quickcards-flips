@@ -18,30 +18,30 @@ interface DeckProps {
 // Correctly declare and export the Deck component
 export default function Deck({ cards }: DeckProps) {
   return (
-    <div className="storyContainer w-full">
+    <div className="storyContainer min-w-[400px] ml-10 rounded-lg">
       <FlashcardArray
         cards={cards}
         controls={true}
         showCount={true}
         frontContentStyle={{
-          backgroundColor: "white",
-          color: "black",
+          backgroundColor: "#f9fafb",
+          color: "#1f2937",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           padding: "10px",
+         
         }}
         backContentStyle={{
-          backgroundColor: "white",
-          color: "black",
-          display: 'flex',
+          backgroundColor: "#f9fafb",
+          color: "#1f2937",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
           padding: "10px",
+          
         }}
-        frontCardStyle={{
-          padding: '10px',
-        }}
+        
       />
     </div>
   );

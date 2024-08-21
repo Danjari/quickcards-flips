@@ -6,19 +6,24 @@ import { createFlashcards } from "../create_flashcards/route";
 import { UnstructuredClient } from "unstructured-client";
 import { Buffer } from "buffer";
 
+
+
 export async function POST(req) {
-  try {
-    // Get the file from the request
-    const formData = await req.formData();
-    const file = formData.get("file");
-    if (!file) {
-      return NextResponse.json({ success: false });
-    }
+    try {
+      // Get the form data from the request
+      const formData = await req.formData();
+      const file = formData.get("file");
+      const userId = formData.get("userId"); // Extract userId from form data
+  
+      if (!file || !userId) {
+        return NextResponse.json({ success: false });
+      }
 
     // Convert file to buffer
     const buffer = Buffer.from(await file.arrayBuffer());
-    const fileRef = ref(storage, `files/${file.name}`);
-
+    const fileRef = ref(storage, `files/${userId}/${file.name}`);
+    console.log("Attempting to upload/retrieve file at path:", `files/${userId}/${file.name}`);
+    
     // Initialize UnstructuredClient
     const key = process.env.UNSTRUCTURED_API_KEY;
     const url = process.env.UNSTRUCTURED_API_URL;
@@ -49,7 +54,7 @@ export async function POST(req) {
     //gettings the text from the pdf
     const jsonElements = JSON.stringify(response.elements, null, 2); 
     //now we are going to store the reference of the pdf in firestore
-    const docRef = doc(db, "pdfs", file.name);
+    const docRef = doc(db, "users", userId, "userPdfs", file.name);
     const data = {
       name: file.name,
       flashcard_deck_name: `Deck for ${file.name}`,
@@ -75,7 +80,7 @@ export async function POST(req) {
     }
 
     // Prepare flashcard data for Firestore
-    const deckRef = doc(db, "flashcards", data.flashcard_deck_name);
+    const deckRef = doc(db, "users", userId, "userFlashcards", data.flashcard_deck_name);
     const flashcardData = {
       cards: flashcardsArray,
       origin: file.name,

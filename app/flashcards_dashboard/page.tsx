@@ -12,11 +12,13 @@ import {
 } from "firebase/firestore";
 import Link from "next/link";
 import Deck from "../components/Deck";
+import {useUser} from '@clerk/nextjs';
 export default function Dashboard() {
   //just setting the type of the dek
   type Deck = {
     id: string;
   };
+ 
   const [decks, setDecks] = useState<Deck[]>([]);//store all decks
   const [deck, setDeck] = useState<Deck | null>(null); //store an individual deck
   const [cardsArray, setCardsArray] = useState<any[]>([]);//store the cards for a singular deck
@@ -24,7 +26,7 @@ export default function Dashboard() {
     Array<{ id: number; frontHTML: string; backHTML: string }>
   >([]); //this is the array that goes into Deck.tsx for card rendering
   const [loading, setLoading] = useState(true); //the loading component
-  //
+  const { user } = useUser(); // Add this line to get the current user
 
   //this is a function to select a deck upon clicking and then setting the cards
   const selectDeck = (deck: any) => {
@@ -44,8 +46,9 @@ export default function Dashboard() {
   //this is to load the different decks at the very beginning
   useEffect(() => {
     const getDecks = async () => {
+      if (!user) return; // Ensure user is not null or undefined
       //get all documents (the collection is named 'flashcards')
-      const querySnapshots = await getDocs(collection(db, "flashcards"));
+      const querySnapshots = await getDocs(collection(db, "users", user.id, "userFlashcards"));
       //
       const decksData: Deck[] = querySnapshots.docs.map((doc: any) => ({
         id: doc.id,
@@ -56,7 +59,7 @@ export default function Dashboard() {
     };
 
     getDecks();
-  }, []);
+  }, [user]); // Add user as a dependency to useEffect
 
   return (
     <div>
@@ -99,3 +102,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

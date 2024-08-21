@@ -4,21 +4,24 @@ export default function PaymentSuccess({
     searchParams: { amount: string };
   }) {
     return (
-      <main className="max-w-xl mx-auto p-10 text-white text-center border m-10 rounded-md [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
-        <div className="mb-10">
-          <h1 className="text-4xl font-extrabold mb-2">Thank you!</h1>
-          <h2 className="text-2xl">You successfully sent</h2>
-  
-          <div className="p-2 rounded-md text-purple-500 mt-5 text-4xl font-bold">
-            ${amount}
-          </div>
-          {/* a button to login */}
-          <div className="mt-10">
-            <a href="/dashboard" className="text-black bg-white p-5 w-1/2 mt-10 rounded-xl font-bold disabled:opacity-50 disabled:animate-pulse hover:bg-slate-200">
-             Start Learning
-            </a>
-          </div>
+    
+        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-screen flex items-center justify-center overflow-hidden">
+            <div className="bg-white mb-10 border rounded-lg p-10 shadow-2xl max-w-md w-full">
+                <h1 className="text-5xl text-indigo-700 font-extrabold mb-4 text-center">Thank you!</h1>
+                <h2 className="text-2xl text-gray-700 text-center">You successfully sent</h2>
+                <div className="p-4 rounded-md text-indigo-600 mt-5 text-4xl font-bold text-center bg-gray-100">
+                    {amount}   
+                </div>
+                <div className="mt-10 flex justify-center">
+                    <a
+                        href="/dashboard"
+                        className="rounded-full bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-lg hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition duration-300 ease-in-out transform hover:scale-105"
+                    >
+                        Start Learning
+                    </a>
+                </div>
+            </div>
         </div>
-      </main>
+     
     );
   }
