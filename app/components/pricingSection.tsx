@@ -19,7 +19,7 @@ const PricingSection = () => {
             Simple No Tricks Pricing
             </h3>
             <p className="mb-12 text-lg md:text-xl text-center justify-center text-coolGray-500 font-medium">
-            We've been there, we know how hard it is. Pick a plan that best suits you.
+            We&apos;ve been there, we know how hard it is. Pick a plan that best suits you.
             </p>
         </div>
         <div className="flex flex-wrap justify-center -mx-4">
