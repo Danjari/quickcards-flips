@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage, db } from "../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { createFlashcards } from "../create_flashcards/route";
+import { createFlashcards } from "../../../lib/openai";
 import { UnstructuredClient } from "unstructured-client";
 import { Buffer } from "buffer";
 
