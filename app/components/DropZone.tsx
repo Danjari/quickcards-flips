@@ -115,7 +115,7 @@ const DropZone = () => {
               <Inbox className="w-10 h-10 text-indigo-600 text-center" />
               {isUploaded ? (
                 <p className="mt-2 text-sm text-gray-600">
-                  {file?.name} has been uploaded, click 'Generate' to create your flashcards
+                  {file?.name} has been uploaded, click &apos;Generate&apos; to create your flashcards
                 </p>
               ) : (
                 <p className="mt-2 text-sm text-gray-600">

@@ -7,6 +7,7 @@ import Link from "next/link";
 import DropZone from "../components/DropZone";
 
 import { UserButton } from '@clerk/nextjs';
+import Image from "next/image";
 
 const UploadPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ const UploadPage = () => {
     <div>
       <nav className="flex justify-between items-center p-4 bg-white border shadow">
         <div className="flex items-center">
-          <img src="/logo.svg" alt="logo" className="h-10 w-10 mr-2" />
+          <Image src="/logo.svg" alt="logo" className="h-10 w-10 mr-2" width={100} height={100} />
           <div className="hidden md:block text-2xl font-bold text-indigo-600">Flips</div>
         </div>
         <div>
@@ -39,10 +40,12 @@ const UploadPage = () => {
             <div className="flex items-center justify-between">
               <a href="#home" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Flips</span>
-                <img
+                <Image
                   alt=""
                   src="/logo.svg"
                   className="h-8 w-auto"
+                  width={100}
+                  height={100}
                 />
               </a>
               <button

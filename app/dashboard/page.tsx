@@ -9,6 +9,7 @@ import { app, db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
 
 export default function Dashboard() {
   type Deck = {
@@ -53,7 +54,7 @@ export default function Dashboard() {
       <div className="flex-1 flex flex-col">
         <nav className="flex justify-between items-center p-4 bg-white opacity-90 border-b border-gray-200 shadow">
           <div className="flex items-center">
-            <img src="/logo.svg" alt="logo" className="h-10 w-10 mr-2" />
+            <Image src="/logo.svg" alt="logo" className="h-10 w-10 mr-2" width={100} height={100} />
             <div className="hidden md:block text-2xl font-bold text-indigo-600">Flips</div>
           </div>
           <div className="flex flex-3 items-center justify-between gap-20">

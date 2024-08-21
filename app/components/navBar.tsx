@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import Image from 'next/image';
 
 
 const navigation = [
@@ -22,7 +23,7 @@ const NavBar = () => {
           <div className="flex lg:flex-1">
             <a href="#home" className="-m-1.5 p-1.5 flex items-center gap-2">
               <span className="sr-only">Fips</span>
-              <img src="/logo.svg" alt="logo" className="h-10 w-auto" />
+              <Image src="/logo.svg" alt="logo" className="h-10 w-auto" width={100} height={100} />
               <span className="text-2xl font-bold text-indigo-600">Flips</span>
             </a>
           </div>
@@ -61,11 +62,8 @@ const NavBar = () => {
             <div className="flex items-center justify-between">
               <a href="#home" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">Flips</span>
-                <img
-                  alt=""
-                  src="/logo.svg"
-                  className="h-8 w-auto"
-                />
+                <Image src="/logo.svg" alt="logo" className="h-10 w-auto" width={100} height={100} />
+                  
               </a>
               <button
                 type="button"
