@@ -12,7 +12,7 @@ const UploadPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div>
-      <nav className="flex justify-between items-center p-4 bg-white opacity-90 border-b border-gray-200 shadow">
+      <nav className="flex justify-between items-center p-4 bg-white border shadow">
         <div className="flex items-center">
           <img src="/logo.svg" alt="logo" className="h-10 w-10 mr-2" />
           <div className="hidden md:block text-2xl font-bold text-indigo-600">Flips</div>
