@@ -1,5 +1,3 @@
-
-
 const Hero = () => {
    
     return (
@@ -41,7 +39,7 @@ const Hero = () => {
               >
                 Get started
               </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+              <a href="https://youtu.be/FNmFAliVxMQ" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold leading-6 text-gray-900">
                30sec Demo <span aria-hidden="true">→</span>
               </a>
             </div>
