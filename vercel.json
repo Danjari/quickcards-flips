@@ -1,6 +1,6 @@
 {
     "functions": {
-      "api/upload/route.js": {
+      "api/**/*.js": {
         "maxDuration": 60 
       }
     }
