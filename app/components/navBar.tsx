@@ -5,6 +5,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Image from 'next/image';
+import Script from 'next/script';
 
 
 const navigation = [
@@ -101,6 +102,19 @@ const NavBar = () => {
             </div>
           </DialogPanel>
         </Dialog>
+       {/* Google Tag Manager Script */}
+       <Script
+               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+                strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+                {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});
+                `}
+            </Script>
       </header>
 
     );
