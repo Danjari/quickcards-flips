@@ -1,4 +1,4 @@
-import Script from 'next/script';
+
 
 export default function PaymentSuccess({
     searchParams: { amount },
@@ -12,7 +12,7 @@ export default function PaymentSuccess({
                 <h1 className="text-5xl text-indigo-700 font-extrabold mb-4 text-center">Thank you!</h1>
                 <h2 className="text-2xl text-gray-700 text-center">You successfully sent</h2>
                 <div className="p-4 rounded-md text-indigo-600 mt-5 text-4xl font-bold text-center bg-gray-100">
-                    {amount}   
+                    ${amount}   
                 </div>
                 <div className="mt-10 flex justify-center">
                     <a
@@ -23,10 +23,7 @@ export default function PaymentSuccess({
                     </a>
                 </div>
             </div>
-            <Script
-               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-                strategy="afterInteractive"
-            />
+            
            
         </div>
      
