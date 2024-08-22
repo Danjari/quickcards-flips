@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import Link from "next/link";
 import DropZone from "../components/DropZone";
-import Script from 'next/script';
+
 
 import { UserButton } from '@clerk/nextjs';
 import Image from "next/image";
@@ -64,18 +64,7 @@ const UploadPage = () => {
         </Dialog>
       </nav>
       <DropZone />
-      <Script
-               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-                strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-                {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});
-                `}
-            </Script>
+     
     </div>
   );
 };

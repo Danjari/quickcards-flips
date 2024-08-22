@@ -10,7 +10,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { useUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
-import Script from 'next/script';
 export default function Dashboard() {
   type Deck = {
     id: string;
@@ -115,18 +114,7 @@ export default function Dashboard() {
               </div>
             </DialogPanel>
           </Dialog>
-          <Script
-               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
-                strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-                {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID});
-                `}
-            </Script>
+          
         </nav>
 
         <div className="flex flex-1">
