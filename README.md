@@ -2,6 +2,9 @@
 
 Flips is a web application designed to help users generate educational flashcards automatically from PDF files. Using AI to extract and structure data from documents, it simplifies the process of learning by generating flashcards that aid in active recall and retention.
 
+## Quick Video Demo 
+
+[![QuickCards Demo](https://img.youtube.com/vi/FNmFAliVxMQ/0.jpg)](https://youtu.be/FNmFAliVxMQ)
 ## Features
 
 - **PDF Upload**: Upload a PDF file, and Flips will automatically extract and process the content.
